@@ -1,5 +1,5 @@
 var win=window.open(
-     "about.blank",
+     "about:blank",
      "JSEmbed",
      "resizeable,scrollbars"
 );
