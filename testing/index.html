@@ -1,10 +1,36 @@
 
-
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 	alert("DOMContentLoaded")
 });
-document.addEventListener("window.onload", function() {
+
+window.onload = function(e){ 
 	alert("window.onload")
+}
+
+const consoleElm = document.querySelector('#console');
+const clearButton = document.querySelector('#clear');
+
+clearButton.addEventListener('click', (event) => {
+	consoleElm.innerHTML = '';
 });
+
+const consoleForm = document.querySelector('#console-form');
+consoleForm.addEventListener('submit', (event) => {
+	event.preventDefault();
+  const command = event.target.querySelector('#command').value;
+  const value = eval(command);
+  consoleElm.innerHTML += (value === undefined ? 'undefined' : value) + '\n';
+});
+
 </script>
+
+<div>
+  <form id="console-form">
+    <input type="text" id="command">
+    <input type="submit" value="Run Command">
+    <button id="clear" type="button">Clear</button>
+  </form>
+  <hr>
+  <pre id="console"></pre>
+</div>
