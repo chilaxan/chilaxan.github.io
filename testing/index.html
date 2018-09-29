@@ -1,4 +1,14 @@
 
+<div>
+  <form id="console-form">
+    <input type="text" id="command">
+    <input type="submit" value="Run Command">
+    <button id="clear" type="button">Clear</button>
+  </form>
+  <hr>
+  <pre id="console"></pre>
+</div>
+
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 	alert("DOMContentLoaded")
@@ -24,13 +34,3 @@ consoleForm.addEventListener('submit', (event) => {
 });
 
 </script>
-
-<div>
-  <form id="console-form">
-    <input type="text" id="command">
-    <input type="submit" value="Run Command">
-    <button id="clear" type="button">Clear</button>
-  </form>
-  <hr>
-  <pre id="console"></pre>
-</div>
