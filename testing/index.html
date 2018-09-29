@@ -8,23 +8,18 @@
   <hr>
   <pre id="console"></pre>
 </div>
-
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 	alert("DOMContentLoaded")
 });
-
 window.onload = function(e){ 
 	alert("window.onload")
 }
-
 const consoleElm = document.querySelector('#console');
 const clearButton = document.querySelector('#clear');
-
 clearButton.addEventListener('click', (event) => {
 	consoleElm.innerHTML = '';
 });
-
 const consoleForm = document.querySelector('#console-form');
 consoleForm.addEventListener('submit', (event) => {
 	event.preventDefault();
@@ -32,5 +27,4 @@ consoleForm.addEventListener('submit', (event) => {
   const value = eval(command);
   consoleElm.innerHTML += (value === undefined ? 'undefined' : value) + '\n';
 });
-
 </script>
