@@ -19,7 +19,7 @@ All versions of fishhook provided the same basic `hook` and `orig` functions to 
 
 ## Major Version 1
 
-While I was building fishhook, I went through a few hooking strategies. In reviewing various objects available in the Python interpreter, the first method I used involved some behavior of the `wrapper_descriptor` class. When dunders for C types are accessed directly, like `int.__add__`, the interpreter creates and returns an instance of `wrapper_descriptor` configured as a `slot wrapper`.
+While I was building fishhook, I went through a few strategies for calculating dunder function pointer locations. In reviewing various objects available in the Python interpreter, the first method I used involved some behavior of the `wrapper_descriptor` class. When dunders for C types are accessed directly, like `int.__add__`, the interpreter creates and returns an instance of `wrapper_descriptor` configured as a `slot wrapper`.
 
 `wrapper_descriptor` instances are layed out as follows:
 ```c
@@ -45,7 +45,7 @@ This layout yields a property `instance->d_base.offset` which details the offset
 
 The way I generated this mapping was not clean. I looped over every subclass in `object.__subclasses__()`, and looked for dunders. Then I checked if they were instances of `wrapper_descriptor`, and pulled out the offsets and the name of a given dunder. Now, the interesting thing about `d_base.offset` is that it is actually the offset of a given dunder on a `PyHeapTypeObject`, not a `PyTypeObject`. The objects are similar, with one key difference, in `PyHeapTypeObject`s, the `tp_as_type` structures are layed out directly after the `PyTypeObject` data. This means, given the offsets from the `wrapperbase`, you could determine where exactly a slot pointer for a given dunder needed to be placed.
 
-I used this to generate a `slotmap` of `__dunder__ : (_size, _location, _index)`, where `_size = sizeof(tp_as_type) / sizeof(void *)`, `_location = offsetof(PyTypeObject, tp_as_type)` and `_index = offsetof(tp_as_type, tp_dunder)`. This meant that later, inside of a hook function, I could allocated a needed `tp_as_type` structure using `_size`, place the pointer to the structure as needed using `_location`, and place the given slot pointer using `_index`. If `_location` was `0`, then the `tp_dunder` existed on the main instance, not on a substructure.
+I used this to generate a `slotmap` of `__dunder__ -> (_size, _location, _index)`, where `_size = sizeof(tp_as_type) / sizeof(void *)`, `_location = offsetof(PyTypeObject, tp_as_type)` and `_index = offsetof(tp_as_type, tp_dunder)`. This meant that later, inside of a hook function, I could allocated a needed `tp_as_type` structure using `_size`, place the pointer to the structure as needed using `_location`, and place the given slot pointer using `_index`. If `_location` was `0`, then the `tp_dunder` existed on the main instance, not on a substructure.
 
 `orig` at this point consisted of a basic cache of the hooked `slot wrapper` instances, and would use some frame inspection to determine which was the correct one when called.
 
