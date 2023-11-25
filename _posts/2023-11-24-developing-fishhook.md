@@ -4,10 +4,10 @@ title:  "Developing fishhook"
 categories: Python
 ---
 
-[Fishhook](https://pypi.org/project/fishhook/) was one of my first major low level Python projects. 
-I set out with the goal to make an easy to use, dynamic Python dunder hooking tool, similar to [forbiddenfruit](https://pypi.org/project/forbiddenfruit/). However, I wanted to improve on the methods used in forbiddenfruit, where many of the offsets and details were hard coded. 
+[Fishhook](https://pypi.org/project/fishhook/){:target="_blank"} was one of my first major low level Python projects. 
+I set out with the goal to make an easy to use, dynamic Python dunder hooking tool, similar to [forbiddenfruit](https://pypi.org/project/forbiddenfruit/){:target="_blank"}. However, I wanted to improve on the methods used in forbiddenfruit, where many of the offsets and details were hard coded. 
 
-*Disclaimer: This post goes into a lot of internal details about how CPython (the reference implementation of Python) works. I recommend reading the CPython C documentation and chunks of referred to source code for clarity*
+*Disclaimer: This post goes into a lot of internal details about how CPython (the reference implementation of Python) works. I recommend reading the [CPython C documentation](https://docs.python.org/3/c-api/){:target="_blank"} and chunks of referred to [source code](https://github.com/python/cpython){:target="_blank"} for clarity*
 
 ## Background
 
@@ -128,4 +128,4 @@ I was also able to overcome another bug in version two, that actually stems from
 
 After that fix, there were some small fixes for `3.12` involving the new feature of managed instance dictionaries, where I have to forcibly remove invalid ones, but thats it. Version two is still the current strategy, and it works fairly well.
 
-The source code for fishhook can be found on github [here](https://github.com/chilaxan/fishhook/)
+The source code for fishhook can be found on github [here](https://github.com/chilaxan/fishhook/){:target="_blank"}
