@@ -12,7 +12,7 @@ minima:
   skin: auto
   social_links:
     - { platform: github,  user_url: "https://github.com/chilaxan" }
-    - { platform: twitter, user_url: "https://twitter.com/chilaxan" }
+    - { platform: twitter, user_url: "https://twitter.com/chilaxan1" }
 
 show_excerpts: true
 disqus:
