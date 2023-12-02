@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Adding Symbolic Numbers To Python - Part 1"
+title:  "Symbolic Numbers In Python - Part 1"
 categories: Python
 ---
 
